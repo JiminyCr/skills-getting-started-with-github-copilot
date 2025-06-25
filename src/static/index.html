@@ -46,5 +46,60 @@
     </footer>
 
     <script src="app.js"></script>
+
+    <script>
+      // Sample JavaScript to demonstrate dynamic content loading
+      document.addEventListener("DOMContentLoaded", function () {
+        const activities = [
+          {
+            name: "Basketball",
+            description: "Join the basketball team and improve your skills.",
+            schedule: "Mon, Wed, Fri - 4 PM to 6 PM",
+            max_participants: 20,
+          },
+          {
+            name: "Drama Club",
+            description: "Explore acting and theater production.",
+            schedule: "Tue, Thu - 3 PM to 5 PM",
+            max_participants: 15,
+          },
+        ];
+
+        const activitiesList = document.getElementById("activities-list");
+
+        activities.forEach((activity) => {
+          const activityCard = document.createElement("div");
+          activityCard.className = "activity-card";
+          activityCard.id = `activity-${activity.name}`;
+
+          activityCard.innerHTML = `
+            <h4>${activity.name}</h4>
+            <p><strong>Description:</strong> ${activity.description}</p>
+            <p><strong>Schedule:</strong> ${activity.schedule}</p>
+            <p><strong>Max Participants:</strong> ${activity.max_participants}</p>
+            <div class="participants-section">
+              <strong>Participants:</strong>
+              <ul class="participants-list">
+                <!-- Participants will be rendered here by JS -->
+              </ul>
+            </div>
+            <button onclick="showSignupForm('${activity.name}')">Sign Up</button>
+          `;
+
+          activitiesList.appendChild(activityCard);
+        });
+      });
+
+      function showSignupForm(activityName) {
+        const signupForm = document.getElementById("signup-form");
+        const activitySelect = document.getElementById("activity");
+
+        // Set the selected activity in the signup form
+        activitySelect.value = activityName;
+
+        // Scroll to the signup form
+        signupForm.scrollIntoView({ behavior: "smooth" });
+      }
+    </script>
   </body>
 </html>
